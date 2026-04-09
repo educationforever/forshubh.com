@@ -406,7 +406,7 @@
       if (data.Heading) html += '<div class="knowledge-heading">' + escHtml(data.Heading) + '</div>';
       html += '<p class="knowledge-text">' + escHtml(text) + '</p>';
       if (data.AbstractSource && data.AbstractURL) {
-        html += '<div class="knowledge-source">From <a href="' + escHtml(data.AbstractURL) + '" target="_blank" rel="noopener noreferrer">' + escHtml(data.AbstractSource) + '</a></div>';
+        html += '<div class="knowledge-source">From ' + escHtml(data.AbstractSource) + '</div>';
       }
       html += '</div>';
     }
@@ -419,10 +419,12 @@
         try { host = new URL(t.FirstURL).hostname.replace('www.', ''); } catch(e) {}
         html += '<div class="result-item">';
         html += '<p class="result-body">' + escHtml(t.Text) + '</p>';
-        html += '<div class="result-source">';
-        html += '<span class="source-dot"></span>';
-        html += '<a href="' + escHtml(t.FirstURL) + '" target="_blank" rel="noopener noreferrer">' + escHtml(host || t.FirstURL) + '</a>';
-        html += '</div>';
+        if (host) {
+          html += '<div class="result-source">';
+          html += '<span class="source-dot"></span>';
+          html += '<span>' + escHtml(host) + '</span>';
+          html += '</div>';
+        }
         html += '</div>';
       });
       html += '</div>';
